@@ -1,6 +1,3 @@
-name = "serverless-telegram-bot-boilerplate"
+name = "serverless-movie-poem-api"
 main = "src/index.js"
 compatibility_date = "2023-04-23"
-
-[vars]
-BOT_TOKEN = "<token>"
