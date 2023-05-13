@@ -1,4 +1,6 @@
 const moodInstructions = {
+  gloomy: "The poem should be gloomy!",
+  cheerful: "Make the poem cheerful!",
 };
 
 export const getPoemPrompt = ({
