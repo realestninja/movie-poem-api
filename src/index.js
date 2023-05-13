@@ -1,16 +1,36 @@
+import { gatherResponse } from "./helper";
+import { callOpenAiAPI } from "./openai";
+
 export default {
   async fetch(request, env, ctx) {
-    const gatherResponse = async (response) => await response.json();
+    const OMDB_API_BASE = "https://www.omdbapi.com/?";
+    const createOmdbApiCall = ({ token, id }) => `${OMDB_API_BASE}apikey=${token}&i=${id}`;
 
-    const getDataFromAPI = async () => {
-      const API_URL = "https://fakestoreapi.com/products";
-      const ApiResponse = await fetch(API_URL);
-      const responseData = await gatherResponse(ApiResponse);
+    const dummyImdbId = "tt0475784";
 
-      const { title } = responseData[0];
-      return title;
+    const getTitleById = async () => {
+      const apiUrl = createOmdbApiCall({
+        token: env.OMDB_API_TOKEN,
+        id: dummyImdbId,
+      });
+
+      const apiResponse = await fetch(apiUrl);
+      const responseData = JSON.parse(await gatherResponse(apiResponse));
+      const { Title = "" } = responseData;
+
+      return Title;
     }
 
-    return new Response(getDataFromAPI());
+    const title = await getTitleById()
+
+    const dummyOpenAiParams = {
+      prompt: `Write a 10 line poem about a movie or series and make sure that it rhymes. The subject for your poem shall be ${title} which has the imdb id ${dummyImdbId}`,
+      bearer: env.OPEN_AI_API_KEY,
+    }
+
+    const openAiResponse = await callOpenAiAPI(dummyOpenAiParams);
+    console.log("openAiResponse:", openAiResponse);
+
+    return new Response(openAiResponse);
   },
 };
