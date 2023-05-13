@@ -1,4 +1,4 @@
-import { gatherResponse } from "./helper";
+import { gatherResponse } from "./worker";
 
 const OMDB_API_BASE = "https://www.omdbapi.com/?";
 const createOmdbApiCallById = ({ token, id }) => `${OMDB_API_BASE}apikey=${token}&i=${id}`;

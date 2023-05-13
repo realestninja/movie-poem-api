@@ -1,4 +1,4 @@
-import { gatherResponse } from "./helper";
+import { gatherResponse } from "./worker";
 
 const API_URL = 'https://api.openai.com/v1/chat/completions';
 
