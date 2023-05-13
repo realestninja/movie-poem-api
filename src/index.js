@@ -1,5 +1,6 @@
 import { getItemTitleById } from "./helpers/omdb";
 import { callOpenAiAPI } from "./helpers/openai";
+import { getPoemPrompt } from "./poemQuery";
 
 export default {
   async fetch(request, env, ctx) {
@@ -7,19 +8,30 @@ export default {
       const payload = await request.json()
 
       if ("imdbId" in payload) {
-        const { imdbId } = payload;
+        const {
+          imdbId,
+          mood = "default",
+          poemLineCount = "10",
+        } = payload;
 
-        const title = await getItemTitleById({
+        const itemTitle = await getItemTitleById({
           id: imdbId,
           token: env.OMDB_API_TOKEN,
         });
 
-        const dummyOpenAiParams = {
-          prompt: `Write a 10 line poem about a movie or series and make sure that it rhymes. The subject for your poem shall be ${title} which has the imdb id ${imdbId}. Do not ever mention the imdb id!`,
+        const poemPrompt = getPoemPrompt({
+          itemTitle,
+          imdbId,
+          mood,
+          poemLineCount,
+        });
+
+        const openAiParams = {
+          prompt: poemPrompt,
           bearer: env.OPEN_AI_API_KEY,
         }
 
-        const openAiResponse = await callOpenAiAPI(dummyOpenAiParams);
+        const openAiResponse = await callOpenAiAPI(openAiParams);
         console.log("openAiResponse:", openAiResponse);
 
         return new Response({
