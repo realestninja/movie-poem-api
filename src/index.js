@@ -10,7 +10,7 @@ export default {
       if ("imdbId" in payload) {
         const {
           imdbId,
-          mood = "default",
+          mood = null,
           poemLineCount = "10",
         } = payload;
 

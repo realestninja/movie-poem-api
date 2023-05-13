@@ -1,5 +1,4 @@
 const moodInstructions = {
-  "default": "",
 };
 
 export const getPoemPrompt = ({
@@ -9,7 +8,7 @@ export const getPoemPrompt = ({
   poemLineCount,
 }) => {
   const poemPromptInstructions = [
-    `Write a ${poemLineCount}line poem about a movie or series and make sure that it rhymes.`,
+    `Write a ${poemLineCount > 12 ? 12 : poemLineCount}line poem about a movie or series and make sure that it rhymes.`,
     `The subject for your poem shall be ${itemTitle} which has the imdb id ${imdbId}.`,
     "Do not ever mention the imdb id!",
   ];
