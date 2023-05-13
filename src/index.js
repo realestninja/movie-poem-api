@@ -29,7 +29,6 @@ export default {
     }
 
     const openAiResponse = await callOpenAiAPI(dummyOpenAiParams);
-    console.log("openAiResponse:", openAiResponse);
 
     return new Response(openAiResponse);
   },

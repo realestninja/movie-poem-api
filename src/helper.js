@@ -1,5 +1,4 @@
 export const gatherResponse = async (response) =>  {
-  console.log("response:", response);
   const { headers } = response;
   const contentType = headers.get('content-type');
 
