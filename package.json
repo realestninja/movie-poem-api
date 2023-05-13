@@ -1,0 +1,16 @@
+{
+  "name": "serverless-movie-poem-api",
+  "version": "1.0.0",
+  "devDependencies": {
+    "wrangler": "2.16.0",
+    "eslint": "^8.39.0"
+  },
+  "private": true,
+  "author": "Nikhil Nawgiri",
+  "license": "MIT",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler publish",
+    "log": "wrangler tail"
+  }
+}
