@@ -1,35 +1,33 @@
-import { gatherResponse } from "./helper";
-import { callOpenAiAPI } from "./openai";
+import { getItemTitleById } from "./helpers/omdb";
+import { callOpenAiAPI } from "./helpers/openai";
 
 export default {
   async fetch(request, env, ctx) {
-    const OMDB_API_BASE = "https://www.omdbapi.com/?";
-    const createOmdbApiCall = ({ token, id }) => `${OMDB_API_BASE}apikey=${token}&i=${id}`;
+    if (request.method === "POST") {
+      const payload = await request.json()
 
-    const dummyImdbId = "tt0475784";
+      if ("imdbId" in payload) {
+        const { imdbId } = payload;
 
-    const getTitleById = async () => {
-      const apiUrl = createOmdbApiCall({
-        token: env.OMDB_API_TOKEN,
-        id: dummyImdbId,
-      });
+        const title = await getItemTitleById({
+          id: imdbId,
+          token: env.OMDB_API_TOKEN,
+        });
 
-      const apiResponse = await fetch(apiUrl);
-      const responseData = JSON.parse(await gatherResponse(apiResponse));
-      const { Title = "" } = responseData;
+        const dummyOpenAiParams = {
+          prompt: `Write a 10 line poem about a movie or series and make sure that it rhymes. The subject for your poem shall be ${title} which has the imdb id ${imdbId}. Do not ever mention the imdb id!`,
+          bearer: env.OPEN_AI_API_KEY,
+        }
 
-      return Title;
+        const openAiResponse = await callOpenAiAPI(dummyOpenAiParams);
+        console.log("openAiResponse:", openAiResponse);
+
+        return new Response({
+          poem: openAiResponse,
+        });
+      }
     }
 
-    const title = await getTitleById()
-
-    const dummyOpenAiParams = {
-      prompt: `Write a 10 line poem about a movie or series and make sure that it rhymes. The subject for your poem shall be ${title} which has the imdb id ${dummyImdbId}`,
-      bearer: env.OPEN_AI_API_KEY,
-    }
-
-    const openAiResponse = await callOpenAiAPI(dummyOpenAiParams);
-
-    return new Response(openAiResponse);
+    return new Response("hello world");
   },
 };
