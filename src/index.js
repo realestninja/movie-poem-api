@@ -3,7 +3,7 @@ import { callOpenAiAPI } from "./helpers/openai";
 import { getPoemPrompt } from "./poemQuery";
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
     if (request.method === "POST") {
       const payload = await request.json()
 
