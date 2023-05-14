@@ -35,9 +35,16 @@ export default {
         const openAiResponse = await callOpenAiAPI(openAiParams);
         console.log("openAiResponse:", openAiResponse);
 
-        return new Response({
-          poem: openAiResponse,
-        });
+        return new Response(
+          JSON.stringify({
+            poem: openAiResponse,
+          }),
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
       }
     }
 
