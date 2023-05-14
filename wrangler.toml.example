@@ -1,3 +1,7 @@
 name = "serverless-movie-poem-api"
 main = "src/index.js"
 compatibility_date = "2023-04-23"
+
+[vars]
+OMDB_API_TOKEN = "<token>"
+OPEN_AI_API_KEY = "<token>"
