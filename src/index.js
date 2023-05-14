@@ -6,6 +6,7 @@ export default {
   async fetch(request, env) {
     if (request.method === "POST") {
       const payload = await request.json()
+      console.log("payload:", payload);
 
       if ("imdbId" in payload) {
         const {
