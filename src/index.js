@@ -4,6 +4,18 @@ import { getPoemPrompt } from "./poemQuery";
 
 export default {
   async fetch(request, env) {
+    const corsHeaders = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST",
+      "Access-Control-Allow-Headers": "*",
+    };
+
+    if (request.method === "OPTIONS") {
+      return new Response("OK", {
+        headers: corsHeaders,
+      });
+    }
+
     if (request.method === "POST") {
       const payload = await request.json()
       console.log("payload:", payload);
@@ -44,6 +56,7 @@ export default {
           {
             headers: {
               "content-type": "application/json",
+              ...corsHeaders,
             },
           }
         );
