@@ -10,8 +10,9 @@ export const getPoemPrompt = ({
   poemLineCount,
 }) => {
   const poemPromptInstructions = [
-    `Write a ${poemLineCount > 12 ? 12 : poemLineCount}line poem about a movie or series.`,
+    "Write a poem about a movie or series.",
     `The subject for your poem shall be ${itemTitle} which has the imdb id ${imdbId}.`,
+    `The poem should be exactly ${poemLineCount > 12 ? 12 : poemLineCount} lines long! Not longer and not shorter.`,
     "Make sure that it rhymes!",
     "Do not ever mention the imdb id!",
     "Do not ignore the amount of lines specified!",
@@ -21,5 +22,6 @@ export const getPoemPrompt = ({
     poemPromptInstructions.push(moodInstructions[mood]);
   }
 
+  console.log("poemPromptInstructions:", poemPromptInstructions);
   return poemPromptInstructions.join(" ");
 }
