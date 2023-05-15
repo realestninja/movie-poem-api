@@ -9,13 +9,15 @@ export const getPoemPrompt = ({
   mood,
   poemLineCount,
 }) => {
+  const finalLineCount = poemLineCount > 12 ? 12 : poemLineCount;
   const poemPromptInstructions = [
     "Write a poem about a movie or series.",
     `The subject for your poem shall be ${itemTitle} which has the imdb id ${imdbId}.`,
-    `The poem should be exactly ${poemLineCount > 12 ? 12 : poemLineCount} lines long! Not longer and not shorter.`,
-    "Make sure that it rhymes!",
-    "Do not ever mention the imdb id!",
-    "Do not ignore the amount of lines specified!",
+    `The poem should consist of ${finalLineCount} lines exactly.`,
+    "Each line should have a rhyming pattern.",
+    "Please ensure that the poem adheres to the specified line count and doesn't exceed or fall short.",
+    "Avoid mentioning the IMDb ID in the poem.",
+    `Remember to maintain the requested ${finalLineCount}-line structure without deviation`,
   ];
 
   if (mood in moodInstructions) {
