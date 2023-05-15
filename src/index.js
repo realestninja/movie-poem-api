@@ -23,7 +23,8 @@ export default {
       if ("imdbId" in payload) {
         const {
           imdbId,
-          mood = null,
+          mood = "",
+          language = "",
           poemLineCount = "10",
         } = payload;
 
@@ -36,6 +37,7 @@ export default {
           itemTitle,
           imdbId,
           mood,
+          language,
           poemLineCount,
         });
 

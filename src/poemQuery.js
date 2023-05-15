@@ -3,11 +3,19 @@ const moodInstructions = {
   cheerful: "Make the poem cheerful!",
 };
 
+const languageInstructions = {
+  english: "Write the poem in English.",
+  german: "Write the poem in German.",
+  french: "Write the poem in French.",
+  spanish: "Write the poem in Spanish.",
+}
+
 export const getPoemPrompt = ({
   itemTitle,
   imdbId,
   mood,
   poemLineCount,
+  language,
 }) => {
   const finalLineCount = poemLineCount > 12 ? 12 : poemLineCount;
   const poemPromptInstructions = [
@@ -22,6 +30,10 @@ export const getPoemPrompt = ({
 
   if (mood in moodInstructions) {
     poemPromptInstructions.push(moodInstructions[mood]);
+  }
+
+  if (language in languageInstructions) {
+    poemPromptInstructions.push(languageInstructions[language]);
   }
 
   console.log("poemPromptInstructions:", poemPromptInstructions);
