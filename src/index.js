@@ -23,8 +23,8 @@ export default {
       if ("imdbId" in payload) {
         const {
           imdbId,
-          mood = "",
-          language = "",
+          poemStyle = "",
+          poemLanguage = "",
           poemLineCount = "10",
         } = payload;
 
@@ -36,8 +36,8 @@ export default {
         const poemPrompt = getPoemPrompt({
           itemTitle,
           imdbId,
-          mood,
-          language,
+          poemStyle,
+          poemLanguage,
           poemLineCount,
         });
 

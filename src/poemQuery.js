@@ -1,9 +1,9 @@
-const moodInstructions = {
+const poemStyleInstructions = {
   gloomy: "The poem should be gloomy!",
   cheerful: "Make the poem cheerful!",
 };
 
-const languageInstructions = {
+const poemLanguageInstructions = {
   english: "Write the poem in English.",
   german: "Write the poem in German.",
   french: "Write the poem in French.",
@@ -14,9 +14,9 @@ const languageInstructions = {
 export const getPoemPrompt = ({
   itemTitle,
   imdbId,
-  mood,
+  poemStyle,
   poemLineCount,
-  language,
+  poemLanguage,
 }) => {
   const finalLineCount = poemLineCount > 12 ? 12 : poemLineCount;
   const poemPromptInstructions = [
@@ -29,12 +29,12 @@ export const getPoemPrompt = ({
     `Remember to maintain the requested ${finalLineCount}-line structure without deviation`,
   ];
 
-  if (mood in moodInstructions) {
-    poemPromptInstructions.push(moodInstructions[mood]);
+  if (poemStyle in poemStyleInstructions) {
+    poemPromptInstructions.push(poemStyleInstructions[poemStyle]);
   }
 
-  if (language in languageInstructions) {
-    poemPromptInstructions.push(languageInstructions[language]);
+  if (poemLanguage in poemLanguageInstructions) {
+    poemPromptInstructions.push(poemLanguageInstructions[poemLanguage]);
   }
 
   console.log("poemPromptInstructions:", poemPromptInstructions);
