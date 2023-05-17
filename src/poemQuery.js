@@ -1,6 +1,9 @@
 const poemStyleInstructions = {
-  gloomy: "The poem should be gloomy!",
-  cheerful: "Make the poem cheerful!",
+  gloomy: "The poem should be gloomy.",
+  cheerful: "Make the poem cheerful.",
+  sarcastic: "Write the poem in a sarcastig way.",
+  spoilerFree: "Keep it spoiler-free. Don't reveal any plot-twist.",
+  condescending: "Write in a condescending way.",
 };
 
 const poemLanguageInstructions = {
