@@ -8,6 +8,7 @@ const languageInstructions = {
   german: "Write the poem in German.",
   french: "Write the poem in French.",
   spanish: "Write the poem in Spanish.",
+  serbian: "The poem language should be Serbian.",
 }
 
 export const getPoemPrompt = ({
